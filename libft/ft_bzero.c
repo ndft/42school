@@ -9,7 +9,7 @@
  Функция bzero устанавливает первые n байт области, начинающейся с s, в ноль (байты, содержащие '\0').
  */
 
-#include <libft.h>
+#include "libft.h"
 
 void    ft_bzero(void *s, size_t n)
 {

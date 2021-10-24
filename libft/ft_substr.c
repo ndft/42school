@@ -9,7 +9,7 @@
  Функция ft_substr выделяет (с помощью malloc) и возвращает подстроку из строки s. Подстрока начинается с индекса start и имеет максимальный размер len.
  */
 
-#include <libft.h>
+#include "libft.h"
 
 char    *ft_substr(char const *s, unsigned int start, size_t len)
 {

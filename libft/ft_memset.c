@@ -9,7 +9,7 @@
  Функция memset заполняет первые len байт области памяти, на которую указывает аргумент b, символом, код которого указывается аргументом c.
  */
 
-#include <libft.h>
+#include "libft.h"
 
 void    *ft_memset(void *b, int c, size_t len)
 {

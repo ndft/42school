@@ -9,7 +9,7 @@
  Функция ft_strjoin выделяет (с помощью malloc) и возвращает новую строку, которая является результатом объединения s1 и s2.
  */
 
-#include <libft.h>
+#include "libft.h"
 
 char    *ft_strjoin(char const *s1, char const *s2)
 {

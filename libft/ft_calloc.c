@@ -9,7 +9,7 @@
  Функция calloc выделяет блок памяти для массива размером — count элементов, каждый из которых занимает size байт, и инициализирует все свои биты в нулями.
  */
 
-#include <libft.h>
+#include "libft.h"
 
 void    *ft_calloc(size_t count, size_t size)
 {
