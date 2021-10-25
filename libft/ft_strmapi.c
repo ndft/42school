@@ -13,18 +13,20 @@
 
 char    *ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
+    char            *x;
     unsigned int    i;
-    char    *str;
 
-    if (!s)
-        return (0);
-    if (!(str = malloc(ft_strlen(s) + 1)))
-        return (0);
     i = 0;
-    while (str[i])
+    if (!s)
+        return (NULL);
+    x = malloc(sizeof(char) * ft_strlen(s) + 1);
+    if (!(x))
+        return (NULL);
+    while (i != ft_strlen(s))
     {
-        str[i] = f(i, str[i]);
+        x[i] = (*f)(i, s[i]);
         i++;
     }
-    return (str);
+    x[i] = '\0';
+    return (x);
 }

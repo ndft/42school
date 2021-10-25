@@ -11,108 +11,115 @@
 
 #include "libft.h"
 
-static int  ft_hm(char const *s, char c)
+static int  ft_wordscount(char const *s, char c)
 {
-    size_t  nbr;
-    int i;
+    int    i;
+    int    words;
 
-    nbr = 0;
     i = 0;
+    words = 0;
     while (s[i])
     {
-        while (s[i] == c)
-            i++;
-        if (i > 0 && s[i] && s[i - 1] == c)
-            nbr++;
-        if (s[i])
-            i++;
-    }
-    if (nbr == 0 && s[i - 1] == c)
-        return (0);
-    if (s[0] != c)
-        nbr++;
-    return (nbr);
-}
-
-static char **ft_mal(char **strs, char const *s, char c)
-{
-    size_t  count;
-    int i;
-    int h;
-
-    count = 0;
-    i = 0;
-    h = 0;
-    while (s[h])
-    {
-        if (s[h] != c)
-            count++;
-        else if (h > 0 && s[h - 1] != c)
+        if (s[i] != c)
         {
-            strs[i] = malloc(sizeof(char) * (count + 1));
-            if (!strs[i])
-                return (0);
-            count = 0;
-            i++;
-        }
-        if (s[h + 1] == '\0' && s[h] != c)
-            if (!(strs[i] = malloc(sizeof(char) * count + 1)))
-                return (0);
-        h++;
-    }
-    return (strs);
-}
-
-static char **ft_cpy(char **strs, char const *s, char c)
-{
-    int i;
-    int j;
-    int h;
-
-    i = 0;
-    j = 0;
-    h = 0;
-    while (s[h])
-    {
-        if (s[h] != c)
-            strs[i][j++] = s[h];
-        else if (h > 0 && s[h - 1] != c)
-            if (h != 0)
+            words++;
+            while (s[i] != c && s[i] != '\0')
             {
-                strs[i][j] = '\0';
-                j = 0;
                 i++;
             }
-        if (s[h + 1] == '\0' && s[h] != c)
-            strs[i][j] = '\0';
-        h++;
+            if (s[i] == '\0')
+                return (words);
+        }
+        i++;
     }
-    return (strs);
+    return (words);
 }
 
-char     **ft_split(char const *s, char c)
+static char **ft_free2d_split(char **strarr)
 {
-    char    **rtn;
-    int nbr_w;
+    int    i;
 
-    if (!s || !*s)
+    i = 0;
+    while (strarr[i])
     {
-        if (!(rtn = malloc(sizeof(char *) * 1)))
-            return (NULL);
-        *rtn = (void *)0;
-        return (rtn);
+        free(strarr[i]);
+        i++;
     }
-    nbr_w = ft_hm(s, c);
-    rtn = malloc(sizeof(char *) * (nbr_w + 1));
-    if (!rtn)
-        return (0);
-    if (ft_mal(rtn, s, c) != 0)
-        ft_cpy(rtn, s, c);
-    else
+    free(strarr);
+    return (NULL);
+}
+
+static int  word_end(char *s, char c, int i)
+{
+    int        click;
+
+    click = 0;
+    while (s && s[i] && click != 1)
     {
-        free(rtn);
+        if (s[i] != c)
+        {
+            while (s[i] != c && s[i] != '\0')
+                i++;
+            click = 1;
+        }
+        if (click != 1)
+            i++;
+    }
+    return (i);
+}
+
+static char *word_allocate(char *s, char c, int i, int j)
+{
+    char    *word;
+    int        click;
+
+    click = 0;
+    while (s && *s && click != 1)
+    {
+        if (*s != c)
+        {
+            while (s[i] != c && s[i] != '\0')
+                i++;
+            click = 1;
+        }
+        if (click != 1)
+            s++;
+    }
+    if (!(word = malloc(i + 1)))
         return (NULL);
+    while (s && *s && *s != c)
+    {
+        word[j] = *s++;
+        j++;
     }
-    rtn[nbr_w] = (void *)0;
-    return (rtn);
+    word[j] = '\0';
+    return (word);
+}
+
+char    **ft_split(char const *s, char c)
+{
+    char    **strarr;
+    int        j;
+    int        i;
+    int        remember;
+
+    if (!s)
+        return (NULL);
+    j = ft_wordscount(s, c);
+    i = 0;
+    remember = 0;
+    if (!(strarr = malloc(sizeof(char *) * (j + 1))))
+        return (NULL);
+    strarr[j] = NULL;
+    while (i < j)
+    {
+        if (!(strarr[i] = word_allocate((char *)(s + remember), c, 0, 0)))
+        {
+            ft_free2d_split(strarr);
+            return (NULL);
+        }
+        remember = word_end((char *)s, c, remember);
+        i++;
+    }
+    return (strarr);
 }
