@@ -10,22 +10,26 @@ ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
 ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
 ft_putendl_fd.c ft_putnbr_fd.c
 
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:%.c=%.o)
 
-HEADER = libft.h
+CC = gcc
 
-$(NAME):
-	@gcc -Wall -Wextra -Werror -c $(SRC) 
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
+CFLAGS = -Wall -Wextra -Werror
+
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+
+$(NAME): $(OBJ)
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 
 all: $(NAME)
 
 clean:
-	@rm -f $(OBJ)
+	rm -rf $(OBJ)
 
 fclean: clean
-	@rm -f $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 
