@@ -11,7 +11,7 @@
 
 #include "libft.h"
 
-static int  ft_wordscount(char const *s, char c)
+static int  ft_word_count(char const *s, char c)
 {
     int    i;
     int    words;
@@ -35,54 +35,54 @@ static int  ft_wordscount(char const *s, char c)
     return (words);
 }
 
-static char **ft_free2d_split(char **strarr)
+static char **ft_malloc_er(char **a)
 {
-    int    i;
+    int i;
 
     i = 0;
-    while (strarr[i])
+    while (a[i])
     {
-        free(strarr[i]);
+        free(a[i]);
         i++;
     }
-    free(strarr);
+    free(a);
     return (NULL);
 }
 
-static int  word_end(char *s, char c, int i)
+static int  word_fin(char *s, char c, int i)
 {
-    int        click;
+    int snap;
 
-    click = 0;
-    while (s && s[i] && click != 1)
+    snap = 0;
+    while (s && s[i] && snap != 1)
     {
         if (s[i] != c)
         {
             while (s[i] != c && s[i] != '\0')
                 i++;
-            click = 1;
+            snap = 1;
         }
-        if (click != 1)
+        if (snap != 1)
             i++;
     }
     return (i);
 }
 
-static char *word_allocate(char *s, char c, int i, int j)
+static char *word_pick(char *s, char c, int i, int j)
 {
     char    *word;
-    int        click;
+    int snap;
 
-    click = 0;
-    while (s && *s && click != 1)
+    snap = 0;
+    while (s && *s && snap != 1)
     {
         if (*s != c)
         {
             while (s[i] != c && s[i] != '\0')
                 i++;
-            click = 1;
+            snap = 1;
         }
-        if (click != 1)
+        if (snap != 1)
             s++;
     }
     if (!(word = malloc(i + 1)))
@@ -98,28 +98,28 @@ static char *word_allocate(char *s, char c, int i, int j)
 
 char    **ft_split(char const *s, char c)
 {
-    char    **strarr;
-    int        j;
-    int        i;
-    int        remember;
+    char    **snap;
+    int j;
+    int i;
+    int re;
 
     if (!s)
         return (NULL);
-    j = ft_wordscount(s, c);
+    j = ft_word_count(s, c);
     i = 0;
-    remember = 0;
-    if (!(strarr = malloc(sizeof(char *) * (j + 1))))
+    re = 0;
+    if (!(snap = malloc(sizeof(char *) * (j + 1))))
         return (NULL);
-    strarr[j] = NULL;
+    snap[j] = NULL;
     while (i < j)
     {
-        if (!(strarr[i] = word_allocate((char *)(s + remember), c, 0, 0)))
+        if (!(snap[i] = word_pick((char *)(s + re), c, 0, 0)))
         {
-            ft_free2d_split(strarr);
+            ft_malloc_er(snap);
             return (NULL);
         }
-        remember = word_end((char *)s, c, remember);
+        re = word_fin((char *)s, c, re);
         i++;
     }
-    return (strarr);
+    return (snap);
 }

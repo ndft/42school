@@ -13,18 +13,21 @@
 
 char    *ft_strrchr(const char *s, int c)
 {
-    int i;
-    char    *ptr;
+    const char  *s2;
+    char    c2;
 
-    i = 0;
-    ptr = 0;
-    while (s[i])
+    s2 = s;
+    c2 = c;
+    while (*s2)
     {
-        if (s[i] == c)
-            ptr = (char *)(s + i);
-        i++;
+        s2++;
     }
-    if (s[i] == c)
-        ptr = (char *)(s + i);
-    return (ptr);
+    while (s2 >= s)
+    {
+        if (*s2-- == c2)
+        {
+            return ((char *)s2 + 1);
+        }
+    }
+    return (NULL);
 }
