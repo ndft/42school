@@ -1,14 +1,3 @@
-//
-//  ft_putnbr_fd.c
-//  
-//
-//  Created by Andrey Udalov on 24.10.2021.
-//
-
-/*
- Выводит целое число n в указанный файловым дескриптором поток.
- */
-
 #include "libft.h"
 
 void    ft_putnbr_fd(int n, int fd)

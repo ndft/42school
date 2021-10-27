@@ -1,14 +1,3 @@
-//
-//  ft_strtrim.c
-//  
-//
-//  Created by Andrey Udalov on 22.10.2021.
-//
-
-/*
- Функция ft_strtrim выделяет (с помощью malloc) и возвращает копию s1 с символами, указанными в set, удаленными из начала и конца строки.
- */
-
 #include "libft.h"
 
 static int    ft_char (char c, char const *set)

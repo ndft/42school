@@ -1,14 +1,3 @@
-//
-//  ft_split.c
-//  
-//
-//  Created by Andrey Udalov on 23.10.2021.
-//
-
-/*
- Выделяет (с помощью malloc) и возвращает массив строк, полученных путем разделения s с использованием символа c в качестве разделителя. Массив должен заканчиваться указателем NULL.
- */
-
 #include "libft.h"
 
 static int  ft_word_count(char const *s, char c)

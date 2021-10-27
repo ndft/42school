@@ -1,23 +1,16 @@
-//
-//  ft_lstclear.c
-//  
-//
-//  Created by Andrey Udalov on 26.10.2021.
-//
-
 #include "libft.h"
 
 void    ft_lstclear(t_list **lst, void (*del)(void *))
 {
-    t_list    *x;
+    t_list    *lstx;
 
     if (!lst)
         return ;
     while (*lst)
     {
-        x = (*lst)->next;
+        lstx = (*lst)->next;
         del((*lst)->content);
         free(*lst);
-        (*lst) = x;
+        (*lst) = lstx;
     }
 }

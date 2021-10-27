@@ -1,23 +1,16 @@
-//
-//  ft_lstmap.c
-//  
-//
-//  Created by Andrey Udalov on 26.10.2021.
-//
-
 #include "libft.h"
 
 t_list    *ft_lstmap(t_list *l, void *(*f)(void *), void (*del)(void *))
 {
-    t_list    *x;
     t_list    *new;
+    t_list    *lstx;
 
     if (!l)
         return (NULL);
     new = ft_lstnew(f(l->content));
     if (!(new))
         return (NULL);
-    x = new;
+    lstx = new;
     while (l)
     {
         if (l->next)
@@ -33,5 +26,5 @@ t_list    *ft_lstmap(t_list *l, void *(*f)(void *), void (*del)(void *))
         l = l->next;
     }
     new->next = NULL;
-    return (x);
+    return (lstx);
 }
