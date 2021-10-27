@@ -3,7 +3,7 @@
 char	*ft_strrchr(const char *s, int c)
 {
 	const char	*s2;
-	const char	c2;
+	char		c2;
 
 	s2 = s;
 	c2 = c;

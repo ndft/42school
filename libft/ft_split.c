@@ -74,7 +74,8 @@ static char	*word_pick(char *s, char c, int i, int j)
 		if (snap != 1)
 			s++;
 	}
-	if (!(word = malloc(i + 1)))
+	word = malloc(i + 1);
+	if (!word)
 		return (NULL);
 	while (s && *s && *s != c)
 	{
@@ -97,12 +98,14 @@ char	**ft_split(char const *s, char c)
 	j = ft_word_count(s, c);
 	i = 0;
 	re = 0;
-	if (!(snap = malloc(sizeof(char *) * (j + 1))))
+	snap = malloc(sizeof(char *) * (j + 1));
+	if (!snap)
 		return (NULL);
 	snap[j] = NULL;
 	while (i < j)
 	{
-		if (!(snap[i] = word_pick((char *)(s + re), c, 0, 0)))
+		snap[i] = word_pick((char *)(s + re), c, 0, 0);
+		if (!snap[i])
 		{
 			ft_malloc_er(snap);
 			return (NULL);
