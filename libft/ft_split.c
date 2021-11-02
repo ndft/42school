@@ -104,14 +104,7 @@ char	**ft_split(char const *s, char c)
 	snap[j] = NULL;
 	while (i < j)
 	{
-		snap[i] = word_pick((char *)(s + re), c, 0, 0);
-		if (!snap[i])
-		{
-			ft_malloc_er(snap);
-			return (NULL);
-		}
-		re = word_fin((char *)s, c, re);
-		i++;
+		return ;
 	}
 	return (snap);
 }
