@@ -1,3 +1,5 @@
+<img src="https://badge42.herokuapp.com/api/stats/mmariel?privacyEmail=true"/>
+
 # 42 school
 **Проекты основного обучения:**
 
